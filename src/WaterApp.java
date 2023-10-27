@@ -17,7 +17,7 @@ public class WaterApp extends JFrame implements ActionListener {
  
         initComponents();
  
-        setSize(240, 150);
+        setSize(580, 150);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
  
