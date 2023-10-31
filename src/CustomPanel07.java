@@ -6,7 +6,8 @@ import javax.swing.JPanel;
 
 public class CustomPanel07 extends JPanel {
 
-	private static final long serialVersionUID = 9042523985940146138L;
+	private static final long 
+		serialVersionUID = 9042523985940146138L;
 
 	@Override
     public void paintComponent(Graphics g) {
