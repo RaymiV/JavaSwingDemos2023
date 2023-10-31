@@ -54,7 +54,6 @@ implements ActionListener
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		double n1 = Double.parseDouble( firstNumberTB.getText());
 		double n2 = Double.parseDouble(secondNumberTB.getText());
 		double result = n1 + n2;

@@ -4,7 +4,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-public class JavaSwingAddDemo extends JFrame implements ActionListener {
+public class JavaSwingAddDemo extends JFrame 
+implements ActionListener {
 
 	JTextField firstNumberTF, secondNumberTF, resultTF;
 	JLabel plusLabel, equalsLabel;
