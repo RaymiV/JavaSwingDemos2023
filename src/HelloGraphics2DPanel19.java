@@ -1,5 +1,7 @@
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
 
 import javax.swing.JPanel;
 
@@ -15,7 +17,7 @@ extends JPanel
 	public HelloGraphics2DPanel19() {
 		pos_x = 10;
 		pos_y = 10;
-		vel_x = vel_y = 2;
+		vel_x = vel_y = 1;
 	}
 	
 	public void tickTime() {
@@ -30,11 +32,25 @@ extends JPanel
 			pos_x = this.getWidth() - CIRCLE_DIAMETER/2;
 			vel_x = -vel_x;
 		}
+		if (pos_y < 0)
+		{
+			pos_y = CIRCLE_DIAMETER/2;
+			vel_y = -vel_y;
+		}
+		if (pos_x < 0) {
+			pos_x = CIRCLE_DIAMETER/2;
+			vel_x = -vel_x;
+		}
 		
 	}
 	
 	public void paint(Graphics g) {
 		Rectangle r = g.getClipBounds();
+		Graphics2D graphics2D = (Graphics2D) g;
+
+	    //Set  anti-alias!
+	    graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+	            RenderingHints.VALUE_ANTIALIAS_ON); 
 		g.clearRect(0, 0, r.width, r.height);
 //		g.drawLine(pos_x, pos_x, 
 //				pos_x + 100, pos_x + 100);
