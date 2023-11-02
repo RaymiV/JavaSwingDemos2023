@@ -20,7 +20,7 @@ extends JFrame implements ActionListener
 		add(panel);
 		
 		timer = new Timer(1000, this);
-		
+		timer.setInitialDelay(5000);
 		setSize(750, 750);
 		timer.start();
 	}
@@ -33,6 +33,8 @@ extends JFrame implements ActionListener
 	public void actionPerformed(ActionEvent e) {
 		System.out.println("Hello Timer " + timer_i);
 		timer_i++;
+		panel.tickTime();
+		panel.repaint();
 	}
 
 }
