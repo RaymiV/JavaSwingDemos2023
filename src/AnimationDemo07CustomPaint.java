@@ -28,7 +28,7 @@ implements ActionListener
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e) { // definition block
 		timer_i++;
 		System.out.println("Hello Timer " + timer_i);
 	}
