@@ -10,7 +10,10 @@ extends JFrame implements ActionListener
 	private static final long serialVersionUID = -7136167299427637163L;
 	private HelloGraphics2DPanel19 panel;
 	private Timer timer;
-	private long timer_i = 0;
+	//private long timer_i = 0;
+	private static final int TICK_TIME = 10;
+	private static final int INITIAL_DELAY = 1000;
+	
 	
 	
 	public HelloGraphics2D19() {
@@ -19,8 +22,8 @@ extends JFrame implements ActionListener
 		panel = new HelloGraphics2DPanel19();
 		add(panel);
 		
-		timer = new Timer(1000, this);
-		timer.setInitialDelay(5000);
+		timer = new Timer(TICK_TIME, this);
+		timer.setInitialDelay(INITIAL_DELAY);
 		setSize(750, 750);
 		timer.start();
 	}
@@ -31,8 +34,8 @@ extends JFrame implements ActionListener
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("Hello Timer " + timer_i);
-		timer_i++;
+		//System.out.println("Hello Timer " + timer_i);
+		//timer_i++;
 		panel.tickTime();
 		panel.repaint();
 	}
