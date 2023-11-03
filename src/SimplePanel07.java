@@ -11,28 +11,32 @@ extends JPanel
 {
 
 	private static final long serialVersionUID = 3569086350820821753L;
-	private double pos_x = 50, pos_y = 300;
-	private double vel_x = -1.0, vel_y = 0.5;
+	private double pos_x [] = {50, 1, 15.5}, pos_y [] = {300.0, 400.5, 3.6};
+	private double vel_x [] = {-1.0, 5.6, 11.3}, vel_y [] = {0.5, 5.9, -3.8};
 	private static final double BALL_DIAMETER = 50.0;
 	
 	public void tickTime() {
-		pos_x += vel_x;
-		pos_y += vel_y;
-		if((pos_x + BALL_DIAMETER/2) > this.getWidth()) {
-			vel_x = -vel_x;
-			pos_x = this.getWidth() - BALL_DIAMETER/2;
+		for(int i = 0; i < pos_x.length; i++) updateBall(i);
+	}
+	
+	public void updateBall(int i) {
+		pos_x[i] += vel_x[i];
+		pos_y[i] += vel_y[i];
+		if((pos_x[i] + BALL_DIAMETER/2) > this.getWidth()) {
+			vel_x[i] = -vel_x[i];
+			pos_x[i] = this.getWidth() - BALL_DIAMETER/2;
 		}
-		if((pos_y + BALL_DIAMETER/2) > this.getHeight()) {
-			vel_y = -vel_y;
-			pos_y = this.getHeight() - BALL_DIAMETER/2;
+		if((pos_y[i] + BALL_DIAMETER/2) > this.getHeight()) {
+			vel_y[i] = -vel_y[i];
+			pos_y[i] = this.getHeight() - BALL_DIAMETER/2;
 		}
-		if((pos_x - BALL_DIAMETER/2) < 0) {
-			vel_x = -vel_x;
-			pos_x = BALL_DIAMETER/2;
+		if((pos_x[i] - BALL_DIAMETER/2) < 0) {
+			vel_x[i] = -vel_x[i];
+			pos_x[i] = BALL_DIAMETER/2;
 		}
-		if((pos_y - BALL_DIAMETER/2) < 0) {
-			vel_y = -vel_y;
-			pos_y = BALL_DIAMETER/2;
+		if((pos_y[i] - BALL_DIAMETER/2) < 0) {
+			vel_y[i] = -vel_y[i];
+			pos_y[i] = BALL_DIAMETER/2;
 		}
 	}
 
@@ -48,14 +52,14 @@ extends JPanel
 	    graphics2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
 	            RenderingHints.VALUE_TEXT_ANTIALIAS_ON); 
 	    
-		paintBall(graphics2D);
+		for(int i = 0; i < pos_x.length; i++) paintBall(graphics2D, i);
 	}
 	
-	private void paintBall(Graphics2D g2d) {
+	private void paintBall(Graphics2D g2d, int i) {
 		Color startColor = Color.red;
 	    Color endColor = Color.blue;
 
-	    int startX = (int)Math.round(pos_x), startY = (int)Math.round(pos_y), 
+	    int startX = (int)Math.round(pos_x[i]), startY = (int)Math.round(pos_y[i]), 
 	    		endX = startX + (int)BALL_DIAMETER, endY = startY + (int)BALL_DIAMETER;
 	    
 	    GradientPaint gradient 
