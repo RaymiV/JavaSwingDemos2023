@@ -11,10 +11,31 @@ extends JPanel
 {
 
 	private static final long serialVersionUID = 3569086350820821753L;
-	private double pos_x [] = {50, 1, 15.5}, pos_y [] = {300.0, 400.5, 3.6};
-	private double vel_x [] = {-1.0, 5.6, 11.3}, vel_y [] = {0.5, 5.9, -3.8};
-	private static final double BALL_DIAMETER = 50.0;
+	private static final int NUM_BALLS = 10;
+	private static final double MIN_VEL = 0.1;
+	private static final double MAX_VEL = 10.0;
 	
+	
+	private double pos_x [], pos_y [];
+	private double vel_x [], vel_y [];
+	private static final double BALL_DIAMETER = 25.0;
+	
+	public SimplePanel07() {
+		pos_x = new double[NUM_BALLS];
+		pos_y = new double[NUM_BALLS];
+		vel_x = new double[NUM_BALLS];
+		vel_y = new double[NUM_BALLS];
+		
+		for (int i = 0; i < NUM_BALLS; i++) createBall(i);
+	}
+	
+	private void createBall(int i) {
+		pos_x[i] = Math.random()*this.getWidth();
+		pos_y[i] = Math.random()*this.getHeight();
+		vel_x[i] = (Math.random()*(MAX_VEL - MIN_VEL)) + MIN_VEL;
+		vel_y[i] = (Math.random()*(MAX_VEL - MIN_VEL)) + MIN_VEL;
+	}
+
 	public void tickTime() {
 		for(int i = 0; i < pos_x.length; i++) updateBall(i);
 	}
