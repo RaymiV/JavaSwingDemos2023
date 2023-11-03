@@ -1,4 +1,9 @@
+import java.awt.Color;
+import java.awt.GradientPaint;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+
 import javax.swing.JPanel;
 
 public class SimplePanel07
@@ -6,9 +11,9 @@ extends JPanel
 {
 
 	private static final long serialVersionUID = 3569086350820821753L;
-	private double pos_x = 10, pos_y = 10;
-	private double vel_x = 1.0, vel_y = 0.5;
-	private static final double BALL_DIAMETER = 25.0;
+	private double pos_x = 50, pos_y = 300;
+	private double vel_x = -1.0, vel_y = 0.5;
+	private static final double BALL_DIAMETER = 50.0;
 	
 	public void tickTime() {
 		pos_x += vel_x;
@@ -33,7 +38,32 @@ extends JPanel
 
 	public void paint(Graphics g) {
 		g.clearRect(0, 0, this.getWidth(), this.getHeight());
-		g.fillOval((int)Math.round(pos_x), (int)Math.round(pos_y), 
+		Graphics2D graphics2D = (Graphics2D) g;
+
+		//Set  anti-alias!
+	    graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+	            RenderingHints.VALUE_ANTIALIAS_ON); 
+
+	   // Set anti-alias for text
+	    graphics2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
+	            RenderingHints.VALUE_TEXT_ANTIALIAS_ON); 
+	    
+		paintBall(graphics2D);
+	}
+	
+	private void paintBall(Graphics2D g2d) {
+		Color startColor = Color.red;
+	    Color endColor = Color.blue;
+
+	    int startX = (int)Math.round(pos_x), startY = (int)Math.round(pos_y), 
+	    		endX = startX + (int)BALL_DIAMETER, endY = startY + (int)BALL_DIAMETER;
+	    
+	    GradientPaint gradient 
+	    	= new GradientPaint(startX, startY, startColor, endX, endY, endColor);
+	    g2d.setPaint(gradient);
+
+	    
+		g2d.fillOval(startX, startY, 
 				(int)BALL_DIAMETER, (int)BALL_DIAMETER);
 	}
 	

@@ -19,7 +19,7 @@ extends JFrame implements ActionListener
 		this.add(this.panel);
 		timer = new Timer(10, this);
 		timer.setInitialDelay(2000);
-		setSize(700, 700);
+		setSize(600, 600);
 		timer.start();
 	}
 
