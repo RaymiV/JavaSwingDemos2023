@@ -31,6 +31,8 @@ extends JFrame implements ActionListener
 	public void actionPerformed(ActionEvent e) {
 		System.out.println("Hello Timer " + timer_i);
 		timer_i++;
+		panel.tickTime();
+		panel.repaint();
 	}
 	
 }
