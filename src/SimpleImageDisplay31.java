@@ -54,11 +54,11 @@ public class SimpleImageDisplay31 extends JFrame
 {
 
 	private static final long serialVersionUID = -5247697980268842784L;
-	private ImageComponent imageC;
+	private AnimationComponent31 imageC;
 	
 	public SimpleImageDisplay31() {
 		super("Simple Image Display Demo Section 31");
-		imageC = new ImageComponent();
+		imageC = new AnimationComponent31();
 		this.add(imageC);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.pack();
