@@ -18,9 +18,11 @@ class ImageComponent extends Component {
 	
 	public ImageComponent() {
 		//String imageFileName = "./assets/Sun_500.png";
-		String imageFileName = "./assets/WentworthLogo.jpeg";
+		//String imageFileName = "./assets/WentworthLogo.jpeg";
+		String imageFileName = "./assets/Earth_156px_transparent.png";
 		try {
 			URL imageURL = ((new File(imageFileName)).toURI()).toURL();
+			//URL imageURL = new URL("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Earth_%2816530938850%29.jpg/640px-Earth_%2816530938850%29.jpg");
 			bi = ImageIO.read(imageURL);
 			w = bi.getWidth(null);
             h = bi.getHeight(null);
