@@ -1,6 +1,6 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 
@@ -15,11 +15,13 @@ extends JFrame implements ActionListener
 	public HelloAnimationDemo07() {
 		super("Simple Animation Demo Section 07");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		panel = new SimplePanel07();
-		this.add(this.panel);
+		setSize(600, 600);
+		panel = new SimplePanel07(this.getWidth(), this.getHeight());
+		setLayout(new BorderLayout());
+		this.add(this.panel, BorderLayout.CENTER);
 		timer = new Timer(10, this);
 		timer.setInitialDelay(2000);
-		setSize(600, 600);
+		
 		timer.start();
 	}
 

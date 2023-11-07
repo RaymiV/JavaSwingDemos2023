@@ -20,7 +20,8 @@ extends JPanel
 	private double vel_x [], vel_y [];
 	private static final double BALL_DIAMETER = 25.0;
 	
-	public SimplePanel07() {
+	public SimplePanel07(int width, int height) {
+		this.setBounds(0, 0, width, height);
 		pos_x = new double[NUM_BALLS];
 		pos_y = new double[NUM_BALLS];
 		vel_x = new double[NUM_BALLS];
@@ -30,8 +31,9 @@ extends JPanel
 	}
 	
 	private void createBall(int i) {
-		pos_x[i] = Math.random()*this.getWidth();
-		pos_y[i] = Math.random()*this.getHeight();
+		final double R = BALL_DIAMETER/2.0; 
+		pos_x[i] = Math.random()*(this.getWidth () - BALL_DIAMETER) + R;
+		pos_y[i] = Math.random()*(this.getHeight() - BALL_DIAMETER) + R;
 		vel_x[i] = (Math.random()*(MAX_VEL - MIN_VEL)) + MIN_VEL;
 		vel_y[i] = (Math.random()*(MAX_VEL - MIN_VEL)) + MIN_VEL;
 	}

@@ -23,6 +23,15 @@ implements ActionListener
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
+	public AddDemoGUI07 (String title) {
+		super(title);
+		
+		initComponents();
+		
+		setSize(700, 100);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	
 	private void initComponents() {
 		firstNumberTB = new JTextField(10);
 		secondNumberTB = new JTextField(10);
