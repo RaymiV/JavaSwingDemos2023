@@ -1,16 +1,51 @@
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 class ImageComponent extends Component {
 
 	private static final long serialVersionUID = 6827678783808986368L;
+	private BufferedImage bi;
+	int w, h;
+	
+	public ImageComponent() {
+		//String imageFileName = "./assets/Sun_500.png";
+		String imageFileName = "./assets/WentworthLogo.jpeg";
+		try {
+			URL imageURL = ((new File(imageFileName)).toURI()).toURL();
+			bi = ImageIO.read(imageURL);
+			w = bi.getWidth(null);
+            h = bi.getHeight(null);
+		} catch (MalformedURLException e) {
+			System.out.println("Error: " + e.getMessage());
+		} catch (IOException e) {
+			System.out.println("Error: " + e.getMessage());
+		}
+	}
 	
 	public void paint(Graphics g) {
-        g.drawLine(0, 0, this.getWidth(), this.getHeight());
-        g.drawLine(this.getWidth(), 0, 0, this.getHeight());
+		if (bi == null) {
+			g.drawLine(0, 0, this.getWidth(), this.getHeight());
+			g.drawLine(this.getWidth(), 0, 0, this.getHeight());
+		} else
+		{
+			g.drawImage(bi, 0, 0, null);
+		}
     }
+	
+	public Dimension getPreferredSize() {
+		if (bi == null) return new Dimension(400, 400);
+        return new Dimension(w, h);
+    }
+
 }
 
 public class SimpleImageDisplay31 extends JFrame
@@ -24,7 +59,7 @@ public class SimpleImageDisplay31 extends JFrame
 		imageC = new ImageComponent();
 		this.add(imageC);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setSize(400, 400);
+		this.pack();
 	}
 
 	public static void main(String[] args) {
