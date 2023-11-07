@@ -146,7 +146,8 @@ public class JumbledImageApplet extends JApplet {
         try {
         	//imageSrc = new URL("https://images.rawpixel.com/image_1300/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcGQzNi0xLWdzZmNfMjAxNzEyMDhfYXJjaGl2ZV9lMDAyMTMxLmpwZw.jpg");
         	//imageSrc = new URL("https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Earth_-_Illustration_%285679642883%29.jpg/768px-Earth_-_Illustration_%285679642883%29.jpg");
-            imageSrc = ((new File(imageFileName)).toURI()).toURL();
+            imageSrc = new URL("https://asset.brandfetch.io/id2TCZiznp/idZ1v9DKu6.jpeg");
+        	//imageSrc = ((new File(imageFileName)).toURI()).toURL();
         } catch (MalformedURLException e) {
         }
         JumbledImageApplet jumbler = new JumbledImageApplet(imageSrc);
