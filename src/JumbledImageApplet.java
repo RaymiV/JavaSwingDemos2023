@@ -76,6 +76,12 @@ class JumbledImage extends Component {
             cells[ri] = tmp;
         }
     }
+    
+    void unJumble() {
+        for (int i=0; i<numcells; i++) {
+            cells[i] = i;
+        }
+    }
 
     public Dimension getPreferredSize() {
         return new Dimension(w, h);
@@ -126,6 +132,8 @@ public class JumbledImageApplet extends JApplet {
         final JumbledImage ji = new JumbledImage(imageSrc);
         add("Center", ji);
         JButton jumbleButton = new JButton("Jumble");
+        JButton unJumbleButton = new JButton("Un Jumble");
+        
         jumbleButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     JButton b = (JButton)e.getSource();
@@ -133,9 +141,20 @@ public class JumbledImageApplet extends JApplet {
                     ji.repaint();
                 };
             });
+        
+        unJumbleButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JButton b = (JButton)e.getSource();
+                ji.unJumble();
+                ji.repaint();
+            };
+        });
+        
         Dimension jumbleSize = ji.getPreferredSize();
         resize(jumbleSize.width, jumbleSize.height+40);
         add("South", jumbleButton);
+        add("North", unJumbleButton);
+        
     }
 
     public static void main(String s[]) {
