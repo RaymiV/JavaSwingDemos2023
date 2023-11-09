@@ -15,16 +15,34 @@ class SolarSystemAnimationComponent19
 extends Component
 {
 	private static final long serialVersionUID = 7821823867386985977L;
+	private static final int NUM_PLANETS = 1;
 	static String imageSunFileName = "assets/NASA_Sun_640px.png";
+	static String imagePlanetFileName [] = {
+			"assets/Earth_156px_transparent.png"
+	};
+	
     private static URL imageSunSrc;
+    private static URL [] imagePlanet = new URL[NUM_PLANETS];
     
     private BufferedImage bi_sun;
-    private double sun_diameter = 100.0; // pixel
+    private BufferedImage [] bi_planet = new BufferedImage[NUM_PLANETS];
+    private double sun_diameter = 100.0; // pixels
+    private double planet_diameter [] = { 30 }; // pixels
+    private double planet_orbit_angle [] = { 0.0 }; // radians
+    private double planet_orbit_radius [] = { 120.0 }; // pixels
+    private double planet_orbital_velocity [] = { 2*Math.PI/5.0 }; // radians per second
+    
     
     public SolarSystemAnimationComponent19() {
     	try {
     		imageSunSrc = ((new File(imageSunFileName)).toURI()).toURL();
     		bi_sun = ImageIO.read(imageSunSrc);
+    		
+    		for (int p = 0; p < NUM_PLANETS; p++) { 
+    			imagePlanet[p] = ((new File(imagePlanetFileName[p])).toURI()).toURL();
+    			bi_planet[p] = ImageIO.read(imagePlanet[p]);
+    		}
+    		
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -40,6 +58,26 @@ extends Component
 	public void paint(Graphics g) {
 		paintBackground(g);
 		paintSun(g);
+		for (int q = 0; q < NUM_PLANETS; q++) paintPlanet(g, q);
+	}
+
+	private void paintPlanet(Graphics g, int i) {
+		double center_x = this.getWidth() /2.0 
+				+ planet_orbit_radius[i]*Math.cos(planet_orbit_angle[i]);
+		
+		double center_y = this.getHeight()/2.0
+				+ planet_orbit_radius[i]*Math.sin(planet_orbit_angle[i]);
+		
+		int start_x = (int)Math.round(center_x - this.planet_diameter[i]/2.0);
+		int start_y = (int)Math.round(center_y - this.planet_diameter[i]/2.0);
+		int end_x   = (int)Math.round(start_x + this.planet_diameter[i]);
+		int end_y   = (int)Math.round(start_y + this.planet_diameter[i]);
+		
+		g.drawImage(
+				bi_planet[i], 
+				start_x, start_y, end_x, end_y,
+				0, 0, bi_planet[i].getWidth(), bi_planet[i].getHeight(),
+				null);
 	}
 
 	private void paintSun(Graphics g) {
