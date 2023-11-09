@@ -41,7 +41,8 @@ import java.util.Random;
 
 class JumbledImage extends Component {
 
-    private int numlocs = 4;
+    private static final long serialVersionUID = 3308907637745555112L;
+	private int numlocs = 4;
     private int numcells = numlocs*numlocs;
     private int[] cells;
     private BufferedImage bi;
