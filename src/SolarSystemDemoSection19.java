@@ -2,6 +2,8 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -10,6 +12,7 @@ import java.net.URL;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import javax.swing.Timer;
 
 class SolarSystemAnimationComponent19 
 extends Component
@@ -103,14 +106,23 @@ extends Component
 		g.drawLine(0, 0, getWidth(), getHeight());
 		g.drawLine(getWidth(), 0, 0, getHeight());
 	}
+
+	public void tickTimer(double secondsElapsed) {
+		for (int i = 0; i < NUM_PLANETS; i++) {
+			double delta_angle = secondsElapsed*this.planet_orbital_velocity[i];
+			this.planet_orbit_angle[i] += delta_angle;
+		}
+	}
 }
 
 public class SolarSystemDemoSection19 
-extends JFrame
+extends JFrame implements ActionListener
 {
 
 	private static final long serialVersionUID = 7038370709677235888L;
 	private SolarSystemAnimationComponent19 animComponent;
+	private Timer timer;
+	private double FRAME_RATE = 50; // frames per second
 	
 	static String imageFileName = "assets/NASA_Sun_640px.png";
     private static URL imageSrc;
@@ -119,13 +131,21 @@ extends JFrame
 		super("Solar System Animation Demo Section 19");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		animComponent = new SolarSystemAnimationComponent19();
-		
+		timer = new Timer((int)(1000/FRAME_RATE), this);
+		timer.setInitialDelay(2000);
 		this.add("Center", animComponent);
 		this.pack();
+		timer.start();
 	}
 	
 	public static void main(String[] args) {
 		new SolarSystemDemoSection19().setVisible(true);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		animComponent.tickTimer(1.0/FRAME_RATE);
+		animComponent.repaint();
 	}
 
 }
