@@ -18,10 +18,12 @@ class SolarSystemAnimationComponent19
 extends Component
 {
 	private static final long serialVersionUID = 7821823867386985977L;
-	private static final int NUM_PLANETS = 1;
-	static String imageSunFileName = "assets/NASA_Sun_640px.png";
+	private static final int NUM_PLANETS = 2;
+	static String imageSunFileName = "./src/data/the sun.png";
 	static String imagePlanetFileName [] = {
-			"assets/Earth_156px_transparent.png"
+			"./src/data/earth.png",
+			"./src/data/mars planet.png",
+			
 	};
 	
     private static URL imageSunSrc;
@@ -30,11 +32,17 @@ extends Component
     private BufferedImage bi_sun;
     private BufferedImage [] bi_planet = new BufferedImage[NUM_PLANETS];
     private double sun_diameter = 100.0; // pixels
-    private double planet_diameter [] = { 30 }; // pixels
-    private double planet_orbit_angle [] = { 0.0 }; // radians
-    private double planet_orbit_radius [] = { 120.0 }; // pixels
-    private double planet_orbital_velocity [] = { 2*Math.PI/5.0 }; // radians per second
+    private double planet_diameter [] = { 30, 15}; // pixels
+    private double planet_orbit_angle [] = { 0.0, (Math.PI/4) }; // radians
+    private double planet_orbit_radius [] = { 120.0, 240.0 }; // pixels
+    private static final double EARTH_ORBITAL_VEL = 2*Math.PI/5.0;
+    private double planet_orbital_velocity [] =
+    	{ EARTH_ORBITAL_VEL,
+    	  EARTH_ORBITAL_VEL*(365.0/687.0)
+    			
+    	}; // radians per second
     
+    private static final boolean DEBUG = false;
     
     public SolarSystemAnimationComponent19() {
     	try {
@@ -102,9 +110,12 @@ extends Component
 
 	private void paintBackground(Graphics g) {
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
-		g.setColor(Color.CYAN);
-		g.drawLine(0, 0, getWidth(), getHeight());
-		g.drawLine(getWidth(), 0, 0, getHeight());
+		if(DEBUG) {
+			g.setColor(Color.CYAN);
+			g.drawLine(0, 0, getWidth(), getHeight());
+			g.drawLine(getWidth(), 0, 0, getHeight());
+		}
+
 	}
 
 	public void tickTimer(double secondsElapsed) {
